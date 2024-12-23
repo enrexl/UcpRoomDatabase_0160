@@ -22,7 +22,7 @@ class HomeDosenViewModel (
         .filterNotNull()
         .map {
             HomeUiState(
-                listMhs = it.toList(),
+                listDosen = it.toList(),
                 isLoading = false
             )
         }
@@ -47,7 +47,7 @@ class HomeDosenViewModel (
 }
 
 data class HomeUiState(
-    val listMhs: List<Dosen> = listOf(),
+    val listDosen: List<Dosen> = listOf(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val errorMessage: String = ""
