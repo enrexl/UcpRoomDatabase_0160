@@ -130,11 +130,29 @@ fun BodyHomeDosenView(
     } }
 }
 
-
+@Composable
+fun ListDosen(
+    listDosen: List<Dosen>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
+){
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = listDosen,
+            itemContent = {dosen ->
+                CardDosen(
+                    dosen = dosen
+                )
+            }
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardMhs(
+fun CardDosen(
     dosen: Dosen,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { }
