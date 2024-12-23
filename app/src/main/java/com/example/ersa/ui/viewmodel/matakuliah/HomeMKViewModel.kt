@@ -1,4 +1,4 @@
-package com.example.ersa.ui.viewmodel
+package com.example.ersa.ui.viewmodel.matakuliah
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,21 +17,21 @@ class HomeMKViewModel (
     private val repositoryMataKuliah: RepositoryMataKuliah
 ): ViewModel(){
 
-    val homeUIState: StateFlow<HomeUiState> = repositoryMataKuliah.getAllMataKuliah()
+    val homeUIState: StateFlow<HomeUiStateMK> = repositoryMataKuliah.getAllMataKuliah()
         .filterNotNull()
         .map {
-            HomeUiState(
+            HomeUiStateMK(
                 listMK = it.toList(),
                 isLoading = false
             )
         }
         .onStart {
-            emit(HomeUiState(isLoading = true))
+            emit(HomeUiStateMK(isLoading = true))
             delay(900)
         }
         .catch {
             emit(
-                HomeUiState(
+                HomeUiStateMK(
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi Kesalahan"
@@ -39,13 +39,13 @@ class HomeMKViewModel (
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUiState(
+            initialValue = HomeUiStateMK(
                 isLoading = true,
             )
         )
 }
 
-data class HomeUiState(
+data class HomeUiStateMK(
     val listMK: List<MataKuliah> = listOf(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
