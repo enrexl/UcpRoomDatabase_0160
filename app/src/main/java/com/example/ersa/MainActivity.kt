@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ersa.ui.navigation.PengelolaHalaman
 import com.example.ersa.ui.theme.RoomDatabaseTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,10 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             RoomDatabaseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                PengelolaHalaman(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
