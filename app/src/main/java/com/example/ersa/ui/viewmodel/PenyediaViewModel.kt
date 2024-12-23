@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.ersa.KrsApp
 import com.example.ersa.ui.view.dosen.HomeDosenView
+import com.example.ersa.ui.view.dosen.InsertDosenView
 
 object PenyediaViewModel {
     val Factory = viewModelFactory {
@@ -14,6 +15,11 @@ object PenyediaViewModel {
                 KrsApp().containerApp.repositoryDosen
             )
         }
+
+        initializer {
+            InsertDosenViewModel(
+                KrsApp().containerApp.repositoryDosen
+            ) }
     }
 }
 
