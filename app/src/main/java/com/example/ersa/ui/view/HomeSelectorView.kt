@@ -1,6 +1,6 @@
 package com.example.ersa.ui.view
 
-import android.graphics.Paint
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,8 +20,8 @@ import com.example.ersa.ui.customwidget.CustomTopAppBar
 @Preview(showBackground = false)
 @Composable
 fun HomeSelectorView(
-    //onDosenClick:()-> Unit={},
-    //onMahasiswaClick:()-> Unit={},
+    onDosenClick:()-> Unit={},
+    onMahasiswaClick:()-> Unit={},
     modifier: Modifier = Modifier
 ){
 
@@ -34,7 +34,9 @@ fun HomeSelectorView(
         ) }
     ){innerPadding ->
         BodyHomeSelectorView(
-            modifier = modifier.padding(innerPadding)
+            modifier = modifier.padding(innerPadding),
+            onDosenClick = onDosenClick,
+            onMhsClick = onMahasiswaClick
         )
     }
 }
@@ -42,7 +44,10 @@ fun HomeSelectorView(
 
 @Composable
 fun BodyHomeSelectorView(
-    modifier: Modifier
+    modifier: Modifier,
+    onDosenClick: () -> Unit,
+    onMhsClick: () -> Unit
+
 ){
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -53,14 +58,14 @@ fun BodyHomeSelectorView(
     ) {
 
         Button(
-            onClick = {},
+            onClick = onDosenClick,
             Modifier.fillMaxWidth()
 
         ) {
             Text(text = "DOSEN")
         }
         Button(
-            onClick = {},
+            onClick = onMhsClick,
             Modifier.fillMaxWidth()
         ) {
             Text(text = "MATAKULIAH")
