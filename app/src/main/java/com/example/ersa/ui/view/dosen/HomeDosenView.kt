@@ -11,8 +11,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
@@ -38,8 +36,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ersa.data.entity.Dosen
 import com.example.ersa.ui.customwidget.CustomTopAppBar
-import com.example.ersa.ui.viewmodel.HomeDosenViewModel
-import com.example.ersa.ui.viewmodel.HomeUiState
+import com.example.ersa.ui.viewmodel.dosen.HomeDosenViewModel
+import com.example.ersa.ui.viewmodel.dosen.HomeUiStateDosen
 import com.example.ersa.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
@@ -53,7 +51,7 @@ fun HomeDosenView(
         topBar = {
             CustomTopAppBar(
                 judul = "Daftar Dosen",
-                showBackButton = false,
+                showBackButton = true,
                 onBack = {},
                 modifier = modifier
             )
@@ -84,7 +82,7 @@ fun HomeDosenView(
 
 @Composable
 fun BodyHomeDosenView(
-    homeUiState: HomeUiState,
+    homeUiState: HomeUiStateDosen,
     modifier: Modifier = Modifier
 ){
     val coroutineScope = rememberCoroutineScope()
@@ -115,7 +113,7 @@ fun BodyHomeDosenView(
                 contentAlignment = Alignment.Center
             ){
                 Text(
-                    text = "Tidak ada data Mahasiswa",
+                    text = "Tidak ada data Dosen",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)
@@ -134,6 +132,7 @@ fun BodyHomeDosenView(
 fun ListDosen(
     listDosen: List<Dosen>,
     modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
 
 ){
     LazyColumn(
@@ -143,7 +142,8 @@ fun ListDosen(
             items = listDosen,
             itemContent = {dosen ->
                 CardDosen(
-                    dosen = dosen
+                    dosen = dosen,
+                    onClick = {onClick}
                 )
             }
         )
@@ -155,6 +155,7 @@ fun ListDosen(
 fun CardDosen(
     dosen: Dosen,
     modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
 ){
     Card(
         modifier = modifier
