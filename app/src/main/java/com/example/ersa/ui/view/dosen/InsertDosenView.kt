@@ -23,22 +23,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ersa.ui.customwidget.CustomTopAppBar
-import com.example.ersa.ui.navigation.AlamatNavigasi
-import com.example.ersa.ui.viewmodel.DosenEvent
-import com.example.ersa.ui.viewmodel.DosenUIState
-import com.example.ersa.ui.viewmodel.FormErrorState
-import com.example.ersa.ui.viewmodel.InsertDosenViewModel
+import com.example.ersa.ui.viewmodel.dosen.DosenEvent
+import com.example.ersa.ui.viewmodel.dosen.DosenUIState
+import com.example.ersa.ui.viewmodel.dosen.FormErrorState
+import com.example.ersa.ui.viewmodel.dosen.InsertDosenViewModel
 import com.example.ersa.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 
-object DestinasiInsertDosen: AlamatNavigasi{
-    override val route: String = "insert_dosen"
-}
 
 @Composable
 fun InsertDosenView(
