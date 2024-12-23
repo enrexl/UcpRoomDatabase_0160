@@ -63,7 +63,7 @@ fun BodyHomeSelectorView(
             onClick = {},
             Modifier.fillMaxWidth()
         ) {
-            Text(text = "MAHASISWA")
+            Text(text = "MATAKULIAH")
         }
     }
 }
