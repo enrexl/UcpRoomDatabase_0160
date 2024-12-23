@@ -1,5 +1,4 @@
 package com.example.ersa.ui.view.dosen
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,9 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.ersaditya.ui.view.mahasiswa.FormMahasiswa
+import com.example.ersa.ui.customwidget.CustomTopAppBar
 import com.example.ersa.ui.navigation.AlamatNavigasi
 import com.example.ersa.ui.viewmodel.DosenEvent
 import com.example.ersa.ui.viewmodel.DosenUIState
@@ -44,6 +44,7 @@ object DestinasiInsertDosen: AlamatNavigasi{
 fun InsertDosenView(
     viewModel: InsertDosenViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onBack:() -> Unit,
+    onNavigate:() -> Unit,
     modifier: Modifier = Modifier
 ){
     val uiState = viewModel.uiState //ambil ui state dari viewmodel
@@ -61,11 +62,43 @@ fun InsertDosenView(
         }
     }
 
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = {SnackbarHost(hostState = snackbarHostState)} //tempatkan snackbar di scaffold
+    ) { padding ->
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)
+            .padding(16.dp)
+        ) {
+            CustomTopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Dosen"
+            )
+            //Isi Body
+            InsertBodyDosen(
+                uiState = uiState,
+                onValueChange = { updatedEvent ->
+                    viewModel.updateState(updatedEvent) //update state di viewmodel
+                },
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel.saveData() // simpan data
+                    }
+                    onNavigate
+                }
+            )
+
+        }
+    }
+
 
 }
 
+
 @Composable
-fun InsertBodyMhs(
+fun InsertBodyDosen(
     modifier: Modifier = Modifier,
     onValueChange: (DosenEvent) -> Unit,
     uiState: DosenUIState,
