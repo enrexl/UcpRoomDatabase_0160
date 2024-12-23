@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -25,8 +26,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ersaditya.ui.view.mahasiswa.FormMahasiswa
 import com.example.ersa.ui.navigation.AlamatNavigasi
 import com.example.ersa.ui.viewmodel.DosenEvent
+import com.example.ersa.ui.viewmodel.DosenUIState
 import com.example.ersa.ui.viewmodel.FormErrorState
 import com.example.ersa.ui.viewmodel.InsertDosenViewModel
 import com.example.ersa.ui.viewmodel.PenyediaViewModel
@@ -59,6 +62,33 @@ fun InsertDosenView(
     }
 
 
+}
+
+@Composable
+fun InsertBodyMhs(
+    modifier: Modifier = Modifier,
+    onValueChange: (DosenEvent) -> Unit,
+    uiState: DosenUIState,
+    onClick: () -> Unit
+){
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FormDosen(
+            dosenEvent = uiState.dosenEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Simpan")
+        }
+    }
 }
 
 @Composable
