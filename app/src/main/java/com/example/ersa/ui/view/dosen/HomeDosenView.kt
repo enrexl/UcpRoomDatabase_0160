@@ -35,17 +35,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ersaditya.ui.view.mahasiswa.BodyHomeMhsView
-import com.ersaditya.ui.view.mahasiswa.CardMhs
-import com.ersaditya.ui.view.mahasiswa.ListMahasiswa
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ersa.data.entity.Dosen
 import com.example.ersa.ui.customwidget.CustomTopAppBar
+import com.example.ersa.ui.viewmodel.HomeDosenViewModel
 import com.example.ersa.ui.viewmodel.HomeUiState
+import com.example.ersa.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeDosenView(
-    //viewModel: Home
+    viewModel: HomeDosenViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onAddDosen:() -> Unit = {},
     modifier: Modifier = Modifier
 ){
@@ -72,13 +72,10 @@ fun HomeDosenView(
             }
         }
     ){innerPadding ->
-        val homeUiState by viewmode
+        val homeUiState by viewModel.homeUIState.collectAsState()
 
-        BodyHomeMhsView(
+        BodyHomeDosenView(
             homeUiState = homeUiState,
-            onClick = {
-                onDetailClick(it)
-            },
             modifier = modifier.padding(innerPadding)
         )
 
@@ -111,7 +108,7 @@ fun BodyHomeDosenView(
             }
         }
 
-        homeUiState.listMhs.isEmpty() -> {
+        homeUiState.listDosen.isEmpty() -> {
             //Menampilkan pesan jika data kosong
             Box(
                 modifier = modifier.fillMaxSize(),
@@ -126,7 +123,10 @@ fun BodyHomeDosenView(
             }
         }else ->{
         //menampilkan daftar Dosen
-
+        ListDosen(
+            listDosen = homeUiState.listDosen,
+            modifier = modifier
+        )
     } }
 }
 
@@ -134,7 +134,7 @@ fun BodyHomeDosenView(
 fun ListDosen(
     listDosen: List<Dosen>,
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit = { }
+
 ){
     LazyColumn(
         modifier = modifier
@@ -155,10 +155,8 @@ fun ListDosen(
 fun CardDosen(
     dosen: Dosen,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = { }
 ){
     Card(
-        onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp)
