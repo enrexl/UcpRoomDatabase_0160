@@ -1,4 +1,4 @@
-package com.example.ersa.ui.viewmodel
+package com.example.ersa.ui.viewmodel.dosen
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
