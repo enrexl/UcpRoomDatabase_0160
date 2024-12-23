@@ -1,4 +1,4 @@
-package com.example.ersa.ui.viewmodel
+package com.example.ersa.ui.viewmodel.dosen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,21 +18,21 @@ class HomeDosenViewModel (
     private val repositoryDosen: RepositoryDosen
 ): ViewModel(){
 
-    val homeUIState: StateFlow<HomeUiState> = repositoryDosen.getAllDosen()
+    val homeUIState: StateFlow<HomeUiStateDosen> = repositoryDosen.getAllDosen()
         .filterNotNull()
         .map {
-            HomeUiState(
+            HomeUiStateDosen(
                 listDosen = it.toList(),
                 isLoading = false
             )
         }
         .onStart {
-            emit(HomeUiState(isLoading = true))
+            emit(HomeUiStateDosen(isLoading = true))
             delay(900)
         }
         .catch {
             emit(
-                HomeUiState(
+                HomeUiStateDosen(
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi Kesalahan"
@@ -40,13 +40,13 @@ class HomeDosenViewModel (
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUiState(
+            initialValue = HomeUiStateDosen(
                 isLoading = true,
             )
         )
 }
 
-data class HomeUiState(
+data class HomeUiStateDosen(
     val listDosen: List<Dosen> = listOf(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
