@@ -19,7 +19,7 @@ class InsertDosenViewModel (private val repositoryDosen: RepositoryDosen) : View
         )
     }
 
-    private fun validateFields(): Boolean {
+    fun validateFields(): Boolean {
         val event = uiState.dosenEvent
         val errorState = FormErrorState(
             nidn = if (event.nidn.isNotEmpty()) null else "NIDN tidak boleh kosong",
@@ -57,7 +57,7 @@ class InsertDosenViewModel (private val repositoryDosen: RepositoryDosen) : View
 
     fun resetSnackBarMessage() {
         uiState = uiState.copy(
-            snackBarMessage = "Input Tidak Valid, Berikan Kembali"
+            snackBarMessage = null
         )
     }
 }
