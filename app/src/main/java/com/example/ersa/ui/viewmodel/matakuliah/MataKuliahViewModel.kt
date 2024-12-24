@@ -17,8 +17,10 @@ class MataKuliahViewModel (
 ) : ViewModel(){
 
     var uiState by mutableStateOf(MataKuliahUIState())
+        private set
 
     var dosenList by mutableStateOf<List<Dosen>>(emptyList())
+        private set
 
     init {
         viewModelScope.launch{
@@ -37,7 +39,7 @@ class MataKuliahViewModel (
 
     }
 
-    private fun validateFields(): Boolean{
+    fun validateFields(): Boolean{
         val event = uiState.mataKuliahEvent
         val errorState = FormErrorState(
             kode = if (event.kode.isNotEmpty()) null else "KODE MK tidak boleh kosong",
@@ -72,14 +74,14 @@ class MataKuliahViewModel (
         }
         else{
             uiState = uiState.copy(
-                snackBarMessage = "Data Gagal Disimpan"
+                snackBarMessage = "Input TIdak Valid. Perika Kembali"
             )
         }
     }
 
     fun resetSnackBarMessage(){
         uiState = uiState.copy(
-            snackBarMessage = "Input tidak valid. Berikan Kembali"
+            snackBarMessage = null
         )
     }
 
