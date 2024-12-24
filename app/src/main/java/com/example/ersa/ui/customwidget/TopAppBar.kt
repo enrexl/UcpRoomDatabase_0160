@@ -29,7 +29,7 @@ fun CustomTopAppBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(120.dp)
             //.padding(16.dp)
             .background(backgroundColor),
         contentAlignment = Alignment.Center // Pastikan konten di tengah
