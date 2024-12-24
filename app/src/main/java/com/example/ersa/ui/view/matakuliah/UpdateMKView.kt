@@ -51,16 +51,17 @@ fun UpdateMKView(
     }
 
     Scaffold(
+        topBar = {
+        CustomTopAppBar(
+            judul = "Edit MataKuliah",
+            showBackButton = true,
+            onBack = onBack,
+        )
+    },
         modifier = modifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
 
-        topBar = {
-            CustomTopAppBar(
-                judul = "Edit Mahasiswa",
-                showBackButton = true,
-                onBack = onBack,
-            )
-        }
+
     ) { padding ->
         Column(
             modifier = Modifier
@@ -84,7 +85,7 @@ fun UpdateMKView(
                             }
                         }
                     }
-                }
+                }, dosenList = uiState.dosenList
             )
 
         }
