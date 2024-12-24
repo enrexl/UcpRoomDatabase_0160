@@ -31,8 +31,10 @@ import com.example.ersa.ui.viewmodel.dosen.DosenUIState
 import com.example.ersa.ui.viewmodel.dosen.FormErrorState
 import com.example.ersa.ui.viewmodel.dosen.InsertDosenViewModel
 import com.example.ersa.ui.viewmodel.PenyediaViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -58,7 +60,14 @@ fun InsertDosenView(
     }
 
     Scaffold(
-        modifier = modifier,
+        topBar = {CustomTopAppBar(
+            onBack = onBack,
+            showBackButton = true,
+            judul = "Tambah Dosen"
+        )
+
+        },
+        modifier = Modifier,
         snackbarHost = {SnackbarHost(hostState = snackbarHostState)} //tempatkan snackbar di scaffold
     ) { padding ->
         Column(modifier = Modifier
@@ -66,11 +75,7 @@ fun InsertDosenView(
             .padding(padding)
             .padding(16.dp)
         ) {
-            CustomTopAppBar(
-                onBack = onBack,
-                showBackButton = true,
-                judul = "Tambah Dosen"
-            )
+
             //Isi Body
             InsertBodyDosen(
                 uiState = uiState,
@@ -79,9 +84,16 @@ fun InsertDosenView(
                 },
                 onClick = {
                     coroutineScope.launch {
-                        viewModel.saveData() // simpan data
+                        if (viewModel.validateFields()){
+                            viewModel.saveData()
+                            delay(600)
+                            withContext(Dispatchers.Main){
+                                onNavigate()
+                            }
+                        }
+
                     }
-                    onNavigate
+
                 }
             )
 
