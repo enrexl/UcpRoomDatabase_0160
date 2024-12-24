@@ -50,14 +50,15 @@ fun HomeMKView(
     viewModel: HomeMKViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onAddMhs:() -> Unit = {},
     onDetailClick: (String) -> Unit ={},
+    onBack:() -> Unit = {},
     modifier: Modifier = Modifier
 ){
     Scaffold(
         topBar = {
             CustomTopAppBar(
-                judul = "Daftar Mahasiswa",
+                judul = "Daftar MataKuliah",
                 showBackButton = true,
-                onBack = {},
+                onBack = {onBack},
                 modifier = modifier
             )
 
@@ -138,7 +139,7 @@ fun BodyHomeMKView(
                 contentAlignment = Alignment.Center
             ){
                 Text(
-                    text = "Tidak ada data Mahasiswa",
+                    text = "Tidak ada data MataKuliah",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)
