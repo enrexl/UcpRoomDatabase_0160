@@ -6,8 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ersa.data.entity.Dosen
 
 import com.example.ersa.data.entity.MataKuliah
+import com.example.ersa.repository.RepositoryDosen
 import com.example.ersa.repository.RepositoryMataKuliah
 import com.example.ersa.ui.navigation.DestinasiUpdateMataKuliah
 import kotlinx.coroutines.flow.filterNotNull
@@ -16,10 +18,14 @@ import kotlinx.coroutines.launch
 
 class UpdateMKViewModel (
     savedStateHandle: SavedStateHandle,
-    private val repositoryMataKuliah: RepositoryMataKuliah
+    private val repositoryMataKuliah: RepositoryMataKuliah,
+    private val repositoryDosen: RepositoryDosen
 ) : ViewModel(){
 
     var updateUIState by mutableStateOf(MataKuliahUIState())
+        private set
+
+    var dosenList by mutableStateOf<List<Dosen>>(emptyList())
         private set
 
     private val  _kode: String = checkNotNull(savedStateHandle[DestinasiUpdateMataKuliah.KODE])
@@ -30,6 +36,12 @@ class UpdateMKViewModel (
                 .filterNotNull()
                 .first()
                 .toUIStateMK()
+        }
+
+        viewModelScope.launch{
+            val dosenListRepo = repositoryDosen.getAllDosen().first()
+                dosenList = dosenListRepo
+            updateUIState = updateUIState.copy(dosenList = dosenList)
         }
     }
 
