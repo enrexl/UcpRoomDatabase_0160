@@ -33,7 +33,7 @@ fun PengelolaHalaman(
         ) {
             HomeSelectorView(
                 onDosenClick = {
-                    navController.navigate(DestinasiInsertDosen.route)
+                    navController.navigate(DestinasiHomeDosen.route)
                 },
                 onMahasiswaClick = {
                     navController.navigate(DestinasiHomeMK.route)
@@ -49,7 +49,8 @@ fun PengelolaHalaman(
         ) {
             HomeDosenView(
                 onAddDosen = { navController.navigate(DestinasiInsertDosen.route) },
-                modifier = Modifier
+                onBack = {navController.navigate(DestinasiHomeDosen.route)}
+                ,modifier = Modifier
             )
         }
 
@@ -74,7 +75,7 @@ fun PengelolaHalaman(
                     )
                 },
                 modifier = Modifier,
-
+                onBack = {navController.popBackStack()}
                 )
         }
 
@@ -83,7 +84,7 @@ fun PengelolaHalaman(
         ) {
             InsertMKView(
                 onBack = { navController.popBackStack() },
-                onNavigate = { navController.popBackStack() },
+                onNavigate = {navController.popBackStack() },
                 modifier = modifier
             )
         }
