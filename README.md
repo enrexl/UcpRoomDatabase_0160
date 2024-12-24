@@ -6,6 +6,8 @@
 
 ### Dosen Insert
 ![image](https://github.com/user-attachments/assets/424cffe9-eddf-40c9-abcd-4af1e35d16d7)
+![image](https://github.com/user-attachments/assets/745b7234-7181-4c00-8408-4cc7bd5a5a9e)
+
 
 ### Mata Kuliah Main 
 ![image](https://github.com/user-attachments/assets/4e92cef8-20a4-4df3-82ad-65393c323f9c)
