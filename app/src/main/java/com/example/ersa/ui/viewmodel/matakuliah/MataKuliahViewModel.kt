@@ -7,16 +7,33 @@ import com.example.ersa.repository.RepositoryMataKuliah
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
+import com.example.ersa.data.entity.Dosen
+import com.example.ersa.repository.RepositoryDosen
 import kotlinx.coroutines.launch
 
-class MataKuliahViewModel (private val repositoryMataKuliah: RepositoryMataKuliah ) : ViewModel(){
+class MataKuliahViewModel (
+    private val repositoryMataKuliah: RepositoryMataKuliah,
+    private val repositoryDosen: RepositoryDosen
+) : ViewModel(){
 
     var uiState by mutableStateOf(MataKuliahUIState())
+
+    var dosenList by mutableStateOf<List<Dosen>>(emptyList())
+
+    init {
+        viewModelScope.launch{
+            repositoryDosen.getAllDosen().collect{dosenList ->
+                this@MataKuliahViewModel.dosenList = dosenList
+                updateUiState()
+            }
+        }
+    }
 
     fun updateState(mataKuliahEvent: MataKuliahEvent){
         uiState = uiState.copy(
             mataKuliahEvent = mataKuliahEvent
         )
+
 
     }
 
@@ -65,13 +82,18 @@ class MataKuliahViewModel (private val repositoryMataKuliah: RepositoryMataKulia
             snackBarMessage = "Input tidak valid. Berikan Kembali"
         )
     }
+
+    private fun updateUiState(){
+        uiState = uiState.copy(dosenList = dosenList)
+    }
 }
 
 
 data class MataKuliahUIState(
     val mataKuliahEvent: MataKuliahEvent = MataKuliahEvent(),
     val isEntryValid: FormErrorState = FormErrorState(),
-    val snackBarMessage: String? = null
+    val snackBarMessage: String? = null,
+    val dosenList: List<Dosen> = emptyList()
 )
 
 data class FormErrorState(
