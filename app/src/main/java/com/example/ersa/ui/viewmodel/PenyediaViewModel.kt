@@ -18,40 +18,41 @@ object PenyediaViewModel {
     val Factory = viewModelFactory {
         initializer {
             HomeDosenViewModel(
-                KrsApp().containerApp.repositoryDosen
+                krsApp().containerApp.repositoryDosen
             )
         }
 
         initializer {
             InsertDosenViewModel(
-                KrsApp().containerApp.repositoryDosen
+                krsApp().containerApp.repositoryDosen
             )
         }
 
         initializer {
             HomeMKViewModel(
-                KrsApp().containerApp.repositoryMataKuliah
+                krsApp().containerApp.repositoryMataKuliah
             )
         }
 
         initializer {
             MataKuliahViewModel(
-                KrsApp().containerApp.repositoryMataKuliah,
-                //KrsApp().containerApp.repositoryDosen
+                krsApp().containerApp.repositoryMataKuliah,
+                krsApp().containerApp.repositoryDosen
             )
         }
 
         initializer {
             UpdateMKViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.repositoryMataKuliah
+                krsApp().containerApp.repositoryMataKuliah,
+                krsApp().containerApp.repositoryDosen
             )
         }
 
         initializer {
             DetailMKViewModel(
                 createSavedStateHandle(),
-                KrsApp().containerApp.repositoryMataKuliah
+                krsApp().containerApp.repositoryMataKuliah
             )
         }
 
