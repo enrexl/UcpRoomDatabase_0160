@@ -1,5 +1,4 @@
 ### Main Page
-![image](https://github.com/user-attachments/assets/739129ce-fcec-4786-bade-e5b81d158cb5)
 ![image](https://github.com/user-attachments/assets/eed242b0-149d-4011-a1a5-8975784d0591)
 
 ### Dosen Main
