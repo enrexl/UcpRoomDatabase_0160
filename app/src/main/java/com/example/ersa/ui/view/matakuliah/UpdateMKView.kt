@@ -58,7 +58,7 @@ fun UpdateMKView(
             onBack = onBack,
         )
     },
-        modifier = modifier,
+        modifier = Modifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
 
 
